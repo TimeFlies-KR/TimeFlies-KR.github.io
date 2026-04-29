@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>index.html 편집기</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6fb;
+      color: #1f2937;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 42px 18px 70px;
+    }
+
+    header {
+      margin-bottom: 24px;
+      padding: 32px;
+      border-radius: 26px;
+      background: #111827;
+      color: white;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 38px;
+    }
+
+    header p {
+      margin: 0;
+      color: #d1d5db;
+      line-height: 1.6;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 400px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .panel,
+    .preview-panel {
+      padding: 24px;
+      border-radius: 22px;
+      background: white;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    h2 {
+      margin: 0 0 16px;
+      font-size: 22px;
+    }
+
+    .step {
+      margin-bottom: 22px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .step:last-child {
+      border-bottom: 0;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    label {
+      display: block;
+      margin: 14px 0 7px;
+      font-weight: bold;
+      color: #374151;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 82px;
+      resize: vertical;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 12px;
+      padding: 12px 15px;
+      font: inherit;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .primary {
+      background: #4f46e5;
+      color: white;
+    }
+
+    .secondary {
+      background: #eef2ff;
+      color: #3730a3;
+    }
+
+    .danger {
+      background: #fff1f2;
+      color: #be123c;
+    }
+
+    .hint {
+      margin-top: 10px;
+      color: #6b7280;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .path-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    .post-list-preview {
+      display: grid;
+      gap: 14px;
+    }
+
+    .post-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: start;
+      padding: 18px;
+      border-radius: 18px;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+    }
+
+    .post-item h3 {
+      margin: 0 0 6px;
+      color: #3730a3;
+    }
+
+    .post-item p {
+      margin: 0 0 8px;
+      color: #4b5563;
+    }
+
+    .post-item code {
+      color: #6b7280;
+      font-size: 13px;
+      word-break: break-all;
+    }
+
+    .status {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: #ecfdf5;
+      color: #047857;
+      font-weight: bold;
+      display: none;
+    }
+
+    .warning {
+      background: #fffbeb;
+      color: #92400e;
+    }
+
+    @media (max-width: 880px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <h1>index.html 편집기</h1>
+      <p>
+        방문자용 index.html에는 관리 버튼을 넣지 않고, 이 편집기에서 index.html을 불러와 글 목록만 수정합니다.
+      </p>
+    </header>
+
+    <div class="layout">
+      <section class="panel">
+        <div class="step">
+          <h2>1. index.html 불러오기</h2>
+
+          <div class="button-row">
+            <button class="primary" onclick="openFolder()">폴더에서 index.html 열기</button>
+          </div>
+
+          <div class="hint">
+            Chrome 또는 Edge에서는 블로그 폴더를 선택하면 index.html을 읽고 저장까지 할 수 있습니다.
+          </div>
+
+          <label for="fileInput">또는 index.html 파일 선택</label>
+          <input id="fileInput" type="file" accept=".html,text/html" />
+
+          <div class="hint">
+            파일 선택 방식은 저장소에 직접 덮어쓰지는 못하고, 수정된 index.html을 다운로드합니다.
+          </div>
+        </div>
+
+        <div class="step">
+          <h2>2. 글 추가</h2>
+
+          <label for="postTitle">글 제목</label>
+          <input id="postTitle" type="text" placeholder="예: 게임이 만들어지는 과정 과제" />
+
+          <label for="postDescription">글 설명</label>
+          <textarea id="postDescription" placeholder="예: 스토리 중심 2D 추리 어드벤처 게임 기획 글"></textarea>
+
+          <label for="postPathMode">글 파일 위치</label>
+          <select id="postPathMode" onchange="updatePathFromSelectedFile()">
+            <option value="Blog" selected>Blog 폴더</option>
+            <option value="current">index.html과 같은 폴더</option>
+            <option value="custom">직접 입력</option>
+          </select>
+
+          <label for="postFileInput">글 HTML 파일 선택</label>
+          <input id="postFileInput" type="file" accept=".html,text/html" />
+
+          <label for="postUrl">글 파일 경로</label>
+          <input id="postUrl" type="text" placeholder="예: Blog/게임이 만들어지는 과정 과제.html" />
+
+          <div class="hint">
+            글 HTML 파일을 선택하면 파일명 기준으로 경로가 자동 입력됩니다.
+            예: <strong>Blog/과제.html</strong>
+          </div>
+
+          <div class="button-row">
+            <button class="primary" onclick="addPost()">글 추가</button>
+            <button class="secondary" onclick="clearForm()">입력 비우기</button>
+          </div>
+        </div>
+
+        <div class="step">
+          <h2>3. 저장</h2>
+
+          <div class="button-row">
+            <button class="primary" onclick="saveToOpenedFolder()">index.html에 저장</button>
+            <button class="secondary" onclick="downloadIndex()">index.html 다운로드</button>
+          </div>
+
+          <div class="hint">
+            폴더에서 열었다면 “index.html에 저장”으로 바로 덮어쓸 수 있습니다.  
+            GitHub Pages에 반영하려면 이후 GitHub에 commit/push 해야 합니다.
+          </div>
+
+          <div id="status" class="status"></div>
+        </div>
+      </section>
+
+      <section class="preview-panel">
+        <h2>현재 글 목록</h2>
+        <div id="postPreview" class="post-list-preview"></div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    let indexDocument = null;
+    let indexHtmlText = "";
+    let directoryHandle = null;
+    let indexFileHandle = null;
+    let selectedPostFileName = "";
+
+    const fileInput = document.getElementById("fileInput");
+    fileInput.addEventListener("change", handleFileInput);
+
+    const postFileInput = document.getElementById("postFileInput");
+    postFileInput.addEventListener("change", handlePostFileInput);
+
+    function showStatus(message, isWarning = false) {
+      const status = document.getElementById("status");
+      status.textContent = message;
+      status.classList.toggle("warning", isWarning);
+      status.style.display = "block";
+    }
+
+    function escapeHtml(text) {
+      return String(text)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    async function openFolder() {
+      if (!("showDirectoryPicker" in window)) {
+        showStatus("이 기능은 Chrome 또는 Edge에서 사용할 수 있습니다. 파일 선택 방식을 사용하세요.", true);
+        return;
+      }
+
+      try {
+        directoryHandle = await window.showDirectoryPicker();
+        indexFileHandle = await directoryHandle.getFileHandle("index.html");
+        const file = await indexFileHandle.getFile();
+        indexHtmlText = await file.text();
+        loadIndexHtml(indexHtmlText);
+        showStatus("index.html을 불러왔습니다.");
+      } catch (error) {
+        if (error && error.name === "AbortError") return;
+        showStatus("index.html을 불러오지 못했습니다. 선택한 폴더에 index.html이 있는지 확인하세요.", true);
+      }
+    }
+
+    async function handleFileInput(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      indexHtmlText = await file.text();
+      loadIndexHtml(indexHtmlText);
+      showStatus("index.html 파일을 불러왔습니다. 저장은 다운로드 방식으로 진행하세요.");
+    }
+
+    function handlePostFileInput(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      selectedPostFileName = file.name;
+      updatePathFromSelectedFile();
+
+      if (!document.getElementById("postTitle").value.trim()) {
+        const title = file.name.replace(/\.html?$/i, "").replaceAll("_", " ");
+        document.getElementById("postTitle").value = title;
+      }
+    }
+
+    function updatePathFromSelectedFile() {
+      if (!selectedPostFileName) return;
+
+      const mode = document.getElementById("postPathMode").value;
+      const urlInput = document.getElementById("postUrl");
+
+      if (mode === "Blog") {
+        urlInput.value = "Blog/" + selectedPostFileName;
+      } else if (mode === "current") {
+        urlInput.value = selectedPostFileName;
+      }
+    }
+
+    function loadIndexHtml(htmlText) {
+      const parser = new DOMParser();
+      indexDocument = parser.parseFromString(htmlText, "text/html");
+
+      let postList = getPostList();
+
+      if (!postList) {
+        const main = indexDocument.querySelector("main") || indexDocument.body;
+        postList = indexDocument.createElement("section");
+        postList.id = "postList";
+        postList.className = "post-list";
+        main.appendChild(postList);
+      }
+
+      renderPreview();
+    }
+
+    function getPostList() {
+      if (!indexDocument) return null;
+      return indexDocument.querySelector("#postList") || indexDocument.querySelector(".post-list");
+    }
+
+    function getPosts() {
+      const postList = getPostList();
+      if (!postList) return [];
+
+      return Array.from(postList.querySelectorAll("a.post-card")).map((card) => {
+        return {
+          title: card.querySelector("h2")?.textContent.trim() || "제목 없음",
+          description: card.querySelector("p")?.textContent.trim() || "",
+          url: card.getAttribute("href") || ""
+        };
+      });
+    }
+
+    function renderPreview() {
+      const preview = document.getElementById("postPreview");
+      const posts = getPosts();
+
+      if (!indexDocument) {
+        preview.innerHTML = "<p>먼저 index.html을 불러오세요.</p>";
+        return;
+      }
+
+      if (posts.length === 0) {
+        preview.innerHTML = "<p>아직 글이 없습니다.</p>";
+        return;
+      }
+
+      preview.innerHTML = posts.map((post, index) => `
+        <div class="post-item">
+          <div>
+            <h3>${escapeHtml(post.title)}</h3>
+            <p>${escapeHtml(post.description)}</p>
+            <code>${escapeHtml(post.url)}</code>
+          </div>
+          <button class="danger" onclick="removePost(${index})">삭제</button>
+        </div>
+      `).join("");
+    }
+
+    function addPost() {
+      if (!indexDocument) {
+        showStatus("먼저 index.html을 불러오세요.", true);
+        return;
+      }
+
+      const title = document.getElementById("postTitle").value.trim();
+      const description = document.getElementById("postDescription").value.trim();
+      const url = document.getElementById("postUrl").value.trim();
+
+      if (!title || !description || !url) {
+        showStatus("글 제목, 설명, 파일 경로를 모두 입력하세요.", true);
+        return;
+      }
+
+      const postList = getPostList();
+
+      const card = indexDocument.createElement("a");
+      card.className = "post-card";
+      card.setAttribute("href", url);
+
+      const h2 = indexDocument.createElement("h2");
+      h2.textContent = title;
+
+      const p = indexDocument.createElement("p");
+      p.textContent = description;
+
+      card.appendChild(h2);
+      card.appendChild(p);
+      postList.appendChild(card);
+
+      clearForm();
+      renderPreview();
+      showStatus("글이 추가되었습니다.");
+    }
+
+    function removePost(index) {
+      const postList = getPostList();
+      const cards = Array.from(postList.querySelectorAll("a.post-card"));
+      const target = cards[index];
+
+      if (!target) return;
+
+      if (confirm("이 글을 목록에서 삭제할까요?")) {
+        target.remove();
+        renderPreview();
+        showStatus("글이 삭제되었습니다.");
+      }
+    }
+
+    function clearForm() {
+      document.getElementById("postTitle").value = "";
+      document.getElementById("postDescription").value = "";
+      document.getElementById("postUrl").value = "";
+      document.getElementById("postFileInput").value = "";
+      selectedPostFileName = "";
+    }
+
+    function serializeIndexHtml() {
+      if (!indexDocument) {
+        showStatus("먼저 index.html을 불러오세요.", true);
+        return null;
+      }
+
+      return "<!DOCTYPE html>\n" + indexDocument.documentElement.outerHTML;
+    }
+
+    function downloadIndex() {
+      const html = serializeIndexHtml();
+      if (!html) return;
+
+      const blob = new Blob([html], { type: "text/html;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "index.html";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+      URL.revokeObjectURL(url);
+      showStatus("수정된 index.html을 다운로드했습니다.");
+    }
+
+    async function saveToOpenedFolder() {
+      if (!indexFileHandle) {
+        showStatus("폴더에서 index.html을 연 경우에만 바로 저장할 수 있습니다. 지금은 다운로드를 사용하세요.", true);
+        return;
+      }
+
+      const html = serializeIndexHtml();
+      if (!html) return;
+
+      try {
+        const writable = await indexFileHandle.createWritable();
+        await writable.write(html);
+        await writable.close();
+        showStatus("index.html에 저장했습니다.");
+      } catch (error) {
+        showStatus("저장에 실패했습니다. 권한을 다시 확인하거나 다운로드를 사용하세요.", true);
+      }
+    }
+
+    renderPreview();
+  </script>
+</body>
+</html>

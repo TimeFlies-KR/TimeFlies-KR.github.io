@@ -1,0 +1,35 @@
+/* themes.css */
+/* body에 theme 이름을 class로 넣어서 사용합니다.
+   예: <body class="theme-indigo"> */
+
+.theme-indigo {
+  --accent: #4f46e5;
+  --accent-dark: #3730a3;
+  --badge-bg: #eef2ff;
+  --page-bg: #f4f6fb;
+  --header-gradient: linear-gradient(135deg, #111827, #3730a3);
+}
+
+.theme-green {
+  --accent: #059669;
+  --accent-dark: #047857;
+  --badge-bg: #ecfdf5;
+  --page-bg: #f0fdf4;
+  --header-gradient: linear-gradient(135deg, #064e3b, #059669);
+}
+
+.theme-dark {
+  --accent: #111827;
+  --accent-dark: #030712;
+  --badge-bg: #f3f4f6;
+  --page-bg: #e5e7eb;
+  --header-gradient: linear-gradient(135deg, #030712, #374151);
+}
+
+.theme-warm {
+  --accent: #ea580c;
+  --accent-dark: #9a3412;
+  --badge-bg: #fff7ed;
+  --page-bg: #fffbeb;
+  --header-gradient: linear-gradient(135deg, #7c2d12, #ea580c);
+}

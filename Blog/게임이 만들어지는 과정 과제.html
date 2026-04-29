@@ -4,169 +4,69 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>게임이 만들어지는 과정 과제</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: "Pretendard", "Noto Sans KR", Arial, sans-serif;
-      background: #f4f6fb;
-      color: #1f2937;
-      line-height: 1.8;
-    }
-    .page {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 48px 18px 80px;
-    }
-    article {
-      background: white;
-      border-radius: 28px;
-      padding: clamp(28px, 5vw, 52px);
-      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.10);
-    }
-    .category {
-      display: inline-block;
-      margin-bottom: 18px;
-      padding: 7px 13px;
-      border-radius: 999px;
-      background: #eef2ff;
-      color: #3730a3;
-      font-weight: 800;
-      font-size: 14px;
-    }
-    h1 {
-      margin: 0 0 12px;
-      font-size: clamp(32px, 6vw, 52px);
-      line-height: 1.2;
-      color: #111827;
-    }
-    .meta {
-      margin-bottom: 38px;
-      color: #6b7280;
-      font-size: 14px;
-    }
-    .content {
-      font-size: 17px;
-      color: #263142;
-      overflow-wrap: break-word;
-    }
-    .content h1 {
-      margin: 42px 0 16px;
-      font-size: 34px;
-      line-height: 1.25;
-      color: #111827;
-    }
-    .content h2 {
-      margin: 38px 0 14px;
-      padding-bottom: 8px;
-      border-bottom: 2px solid #eef2ff;
-      font-size: 27px;
-      color: #111827;
-    }
-    .content h3 {
-      margin: 30px 0 12px;
-      font-size: 22px;
-      color: #1f2937;
-    }
-    .content p {
-      margin: 0 0 18px;
-    }
-    .content strong {
-      color: #3730a3;
-      font-weight: 900;
-    }
-    .content em {
-      color: #4b5563;
-    }
-    .content ul,
-    .content ol {
-      margin: 0 0 20px;
-      padding-left: 26px;
-    }
-    .content li {
-      margin: 7px 0;
-    }
-    .content blockquote {
-      margin: 26px 0;
-      padding: 20px 22px;
-      border-left: 5px solid #4f46e5;
-      border-radius: 16px;
-      background: #f8fafc;
-      color: #374151;
-    }
-    .content code {
-      padding: 3px 6px;
-      border-radius: 7px;
-      background: #f3f4f6;
-      color: #be123c;
-      font-family: Consolas, Monaco, monospace;
-      font-size: 0.92em;
-    }
-    .content pre {
-      margin: 24px 0;
-      padding: 18px;
-      border-radius: 16px;
-      background: #111827;
-      color: #f9fafb;
-      overflow-x: auto;
-    }
-    .content pre code {
-      padding: 0;
-      background: transparent;
-      color: inherit;
-    }
-    .content hr {
-      margin: 34px 0;
-      border: 0;
-      border-top: 1px solid #e5e7eb;
-    }
-    .content a {
-      color: #4f46e5;
-      font-weight: 800;
-      text-decoration: none;
-      border-bottom: 1px solid currentColor;
-    }
-    .content table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 24px 0;
-      font-size: 15px;
-    }
-    .content th,
-    .content td {
-      border: 1px solid #e5e7eb;
-      padding: 10px 12px;
-      text-align: left;
-    }
-    .content th {
-      background: #f8fafc;
-    }
-    footer {
-      margin-top: 36px;
-      color: #6b7280;
-      text-align: center;
-      font-size: 14px;
-    }</style>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/themes.css">
 </head>
-<body>
-  <main class="page">
-    <article>
-      <span class="category">게임 기획 과제</span>
-      <h1>게임이 만들어지는 과정 과제</h1>
-      <div class="meta">2026년 4월 28일</div>
-      <div class="content">
-<h2>게임이 만들어지는 과정 과제</h2>
-<h3>1. 내가 상상하는 게임 아이디어</h3>
-<p>컨셉은 어떤 과학자가 생명공학을 불법적으로 연구를 하고 있는 평범한 동네<br>주인공은 실패한 것 처럼 보였던 첫번째 성공작이였고<br>과학자는 성공작을 통해 여러 시험에 거치며 안정화 작업을 진행중이던 시점에<br>주인공은 사건에 휘말리고 과학자의 야망을 저지하는 스토리 중심의 2D 추리 어드벤처 게임</p>
-<p>게임은 2D 화면으로 진행되며, 플레이어는 캐릭터를 움직여 맵을 탐색하고, 오브젝트를 조사하고, 퍼즐을 해결한다.<br>중간중간 등장하는 인물들과 대화를 나누며 선택지를 고르게 되고, 이 선택에 따라 이야기의 흐름이나 엔딩이 달라진다.</p>
-<h3>2. 게임의 핵심 재미요소</h3>
-<p>이 게임의 핵심 재미 요소는 추리와 선택에 따른 이야기 변화다.</p>
-<p>플레이어는 방 안에 숨겨진 단서들을 모아 사건의 진실을 추리해야 한다.<br>예를 들어 책상 위의 일기장, 찢어진 사진, 잠긴 서랍, 벽에 남겨진 낙서 같은 작은 단서들이 서로 연결되어 하나의 이야기를 완성한다.</p>
-<p>또한 플레이어가 어떤 선택을 하느냐에 따라 주인공 또는 주변인물의 행동이 달라지고<br>방을 탈출 하더라도 그안에 어떤 단서를 발견했냐에 따라 다른 결과가 나오는 구조를 만들고 싶다.</p>
-<p>이 게임에서 플레이어가 느꼈으면 하는 감정은 궁금함, 긴장감, 그리고 마지막에 진실을 알게 되었을 때의 여운이다.<br>처음에는 게임을 진행하면서 점점 진실에 가까워지는 몰입감을 주고 싶다.</p>
-<h3>3. 참고하고 싶은 게임</h3>
-<p>단간론파 , 스태퍼 케이스, 역전재판</p>
 
+<body class="theme-indigo">
+  <main class="blog-page">
+    <a class="back-link" href="../index.html">← 글 목록으로</a>
+    <article class="blog-article">
+      <div class="article-inner">
+        <span class="category">베이스 캠프 과제</span>
+
+        <h1 class="blog-title">게임이 만들어지는 과정 과제</h1>
+
+        <div class="meta">2026년 4월 28일</div>
+
+        <div class="content">
+          <h2>게임이 만들어지는 과정 과제</h2>
+
+          <h3>1. 내가 상상하는 게임 아이디어</h3>
+
+          <p>
+            컨셉은 어떤 과학자가 생명공학을 불법적으로 연구를 하고 있는 평범한 동네<br>
+            주인공은 실패한 것처럼 보였던 첫 번째 성공작이었고<br>
+            과학자는 성공작을 통해 여러 시험을 거치며 안정화 작업을 진행 중이던 시점에<br>
+            주인공은 사건에 휘말리고 과학자의 야망을 저지하는 스토리 중심의 2D 추리 어드벤처 게임
+          </p>
+
+          <p>
+            게임은 2D 화면으로 진행되며, 플레이어는 캐릭터를 움직여 맵을 탐색하고,
+            오브젝트를 조사하고, 퍼즐을 해결한다.<br>
+            중간중간 등장하는 인물들과 대화를 나누며 선택지를 고르게 되고,
+            이 선택에 따라 이야기의 흐름이나 엔딩이 달라진다.
+          </p>
+
+          <h3>2. 게임의 핵심 재미 요소</h3>
+
+          <p>
+            이 게임의 핵심 재미 요소는 추리와 선택에 따른 이야기 변화다.
+          </p>
+
+          <p>
+            플레이어는 방 안에 숨겨진 단서들을 모아 사건의 진실을 추리해야 한다.<br>
+            예를 들어 책상 위의 일기장, 찢어진 사진, 잠긴 서랍, 벽에 남겨진 낙서 같은
+            작은 단서들이 서로 연결되어 하나의 이야기를 완성한다.
+          </p>
+
+          <p>
+            또한 플레이어가 어떤 선택을 하느냐에 따라 주인공 또는 주변 인물의 행동이 달라지고,<br>
+            방을 탈출하더라도 그 안에서 어떤 단서를 발견했느냐에 따라 다른 결과가 나오는 구조를 만들고 싶다.
+          </p>
+
+          <p>
+            이 게임에서 플레이어가 느꼈으면 하는 감정은 궁금함, 긴장감,
+            그리고 마지막에 진실을 알게 되었을 때의 여운이다.<br>
+            게임을 진행하면서 점점 진실에 가까워지는 몰입감을 주고 싶다.
+          </p>
+
+          <h3>3. 참고하고 싶은 게임</h3>
+
+          <p>
+            단간론파, 스태퍼 케이스, 역전재판
+          </p>
+        </div>
       </div>
     </article>
   </main>
