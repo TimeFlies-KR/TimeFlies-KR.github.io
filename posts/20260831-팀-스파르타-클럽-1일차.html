@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>팀 스파르타 클럽 1일차 — TimeFlies</title>
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1 class="site-name"><a href="../index.html">Time<span>Flies</span></a></h1>
+    <nav>
+      <a href="../index.html">← 목록으로</a>
+    </nav>
+  </header>
+
+  <article class="post">
+    <div class="date">2026. 08. 31</div>
+    <span class="tag" style="color:var(--amber);border-color:var(--amber);">게임개발</span>
+    <h1 class="post-title">팀 스파르타 클럽 1일차</h1>
+    <div class="post-body">
+      <h2>인터넷과 웹 (Internet &amp; 웹)</h2>
+      <p>인터넷(Internet): 전 세계의 컴퓨터와 네트워크를 연결하는 물리적 통신 기반망</p>
+      <p>웹(Web, WWW): 인터넷 위에서 웹페이지와 정보를 주고받는 서비스</p>
+      <p>URI vs URL: URI는 인터넷 자원을 식별하는 전체 이름이며,
+      URL은 자원의 위치와 접근 방법(스킴 등)까지 포함하는 URI의 하위 개념 
+      (보통 실무에서는 URL로 통칭)</p>
+      <h2>클라이언트와 서버(Client &amp; Server)</h2>
+      <p>역할 관계 : 기기 종류가 아니라 역할에 따라 요청을 보내는 쪽이 클라이언트, 응답을 제공하는 쪽이 서버
+          ex) 서버 애플리케이션도 데이터베이스(DB)에 데이터를 요청할때는 클라이언트</p>
+      <h2>URL, DNS, HTTP</h2>
+      <p>URL 구조: scheme://host:port/path?query#fragment
+(예:https://shop.example.com:443/products/42?color=blue)</p>
+      <p>DNS (Domain Name System): 사람이 읽기 쉬운 도메인 이름을 실제 IP 주소로 변환해 주는 인터넷의 전화번호부입니다.</p>
+      <p>HTTPS = HTTP + TLS: 평문 통신인 HTTP에 보안 계층(TLS)을 더해 데이터 암호화, 서버 인증, 무결성을 보장합니다. (HTTP는 80번 포트, HTTPS는 443번 포트 사용)</p>
+      <h2>Git 설정</h2>
+      <p>git add : 로컬 작업 공간에 넣음
+git commit : 버전 업데이트
+git push : github등의 클라우드 공간에 버전 기록</p>
+
+        <h2>Conventional Commit Message (컨벤셔널 커밋)</h2>
+        <p>feat : 새로운 기능 추가</p>
+        <p>fix : 버그 수정</p>
+        <p>docs : 문서 변경(README, API문서 등)</p>
+        <p>style :코드 동작에 영향 없는 포맷팅, 세미콜론 누락 수정 등 </p>
+        <p>refactor : 버그 수정이나 새 기능 추가 없이 코드 구조를 개선</p>
+        <p>test : 테스트 코드 추가 또는 기존 테스트 수정</p>
+        <p>chore : 빌드 업무, 패키지 매니저 설정, 기타 보조 도구 관련 변경</p>
+        <p>perf : 성능 개선을 위한 코드 변경</p>
+        <p>ci : CI 설정 파일 및 스크립트 수정 (GitHub Actions,Jenkins 등)</p>
+    </div>
+  </article>
+
+  <footer>
+    <span>© 2026 TimeFlies</span>
+    <div>
+      <a href="../index.html">목록으로</a>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
