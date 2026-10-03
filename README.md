@@ -1,6 +1,17 @@
 # TimeFlies 사이트
 
-게임 소개 · 개발 블로그 · 자기 소개 · 회사 소개를 한곳에 모은 정적 사이트. [Astro](https://astro.build)로 만들고 GitHub Pages로 배포한다.
+https://timeflies-kr.github.io
+
+세 개의 독립 사이트와 그 사이를 잇는 합본 첫 화면으로 이루어진 정적 사이트. [Astro](https://astro.build)로 만들고 GitHub Pages로 배포한다.
+
+| 주소 | 사이트 | 성격 |
+|---|---|---|
+| `/` | 합본 | 세 사이트로 **이동만** 한다. 다른 내용은 두지 않는다 |
+| `/company/` | 회사 소개 | 회사 첫 화면(소개·원칙·게임·연락처) + 게임 목록·게임 상세 |
+| `/blog/` | 개발 블로그 | 글 목록(연도별) · 글 · 태그 |
+| `/about/` | 자기 소개 | 한 장짜리 포트폴리오(기술·프로젝트·이력·연락처) |
+
+세 사이트는 각자 자기 머리글·메뉴·강조색을 가진 "메인"이다. 서로의 메뉴에 섞이지 않고, 바닥글의 "TimeFlies 전체 보기"로만 합본에 돌아간다.
 
 ## 실행
 
@@ -14,47 +25,51 @@ npm run build    # dist/ 에 배포용 파일 생성
 
 ## 자주 하는 일
 
-| 하고 싶은 것 | 방법 |
+| 하고 싶은 것 | 고칠 곳 |
 |---|---|
-| 블로그 글 쓰기 | `src/content/blog/` 에 `.md` 파일 추가 (예시 파일의 머리말 형식 참고). `draft: true` 이면 숨김 |
-| 게임 추가 | `src/content/games/` 에 `.md` 파일 추가 |
-| 자기 소개·회사 소개 수정 | `src/content/pages/about.md`, `company.md` |
-| 메뉴에서 섹션 끄기/켜기 | `src/site.config.ts` 의 `enabled` |
-| 새 섹션 추가 | `src/site.config.ts` 의 `sections` 에 항목 추가. `kind: 'page'` 면 `src/content/pages/<id>.md` 를 만든다 |
-| 사이트 이름·소개 문구 | `src/site.config.ts` 의 `site` |
-| 색 바꾸기 | `src/styles/global.css` 맨 위 `:root` 토큰 (라이트/다크 각각) |
-
-꺼진 섹션은 메뉴에서 빠질 뿐 아니라 페이지 자체가 만들어지지 않는다.
+| 블로그 글 쓰기 | `src/content/blog/` 에 `.md` 추가 (예시 파일의 머리말 형식 참고). `draft: true` 이면 숨김 |
+| 블로그 이름·소개 | `src/data/blog.ts` |
+| 게임 추가 | `src/content/games/` 에 `.md` 추가 → 회사 사이트에 자동으로 나온다 |
+| 회사 소개 문구·연락처 | `src/data/company.ts` |
+| 자기 소개(기술·프로젝트·이력·연락처) | `src/data/about.ts` |
+| 합본 첫 화면의 이동 버튼 | `src/pages/index.astro` 의 `sites` |
+| 색 | `src/styles/base.css` 맨 위 토큰. 사이트별 강조색은 `[data-site='company']` 등 |
 
 ## 구조
 
 ```
 src/
-  site.config.ts          사이트 정보와 섹션 목록
-  content.config.ts       글 종류(pages·blog·games)와 머리말 형식
-  content/                실제 글 (마크다운)
-  layouts/Base.astro      머리글·메뉴·바닥글 공통 틀
-  pages/index.astro       첫 화면 (섹션 카드 + 최근 글)
-  pages/[section]/        섹션 페이지와 글 페이지 (설정에서 자동 생성)
-  styles/global.css       색·글꼴·레이아웃
+  pages/index.astro            합본 (이동만)
+  pages/company/               회사 사이트
+  pages/blog/                  블로그 사이트
+  pages/about/                 자기 소개 사이트
+  layouts/Shell.astro          html·head 공통 틀 (머리글 없음)
+  layouts/CompanyLayout.astro  회사 사이트 머리글·메뉴·바닥글
+  layouts/BlogLayout.astro     블로그 사이트 머리글·메뉴·바닥글
+  layouts/AboutLayout.astro    자기 소개 사이트 머리글·메뉴·바닥글
+  data/                        사이트별 문구 (company·blog·about)
+  content/blog, content/games  마크다운 글
+  components/PostList.astro    블로그 글 목록
+  styles/base.css              공통 색·글꼴·조각
+legacy/                        교체 전 사이트 보관본 (배포되지 않음)
 .github/workflows/deploy.yml   main 푸시 시 자동 배포
 ```
 
 ## 배포
 
-1. 이 폴더를 GitHub 저장소의 `main` 브랜치에 푸시한다.
-2. 저장소 **Settings → Pages → Build and deployment → Source** 를 **GitHub Actions** 로 바꾼다.
-3. 이후 `main` 에 푸시할 때마다 자동으로 빌드·배포된다.
+`main` 에 푸시하면 GitHub Actions가 빌드해 Pages에 올린다. 저장소 Settings → Pages → Source 는 **GitHub Actions** 여야 한다.
 
-저장소 이름이 `<계정>.github.io` 가 아니면 `astro.config.mjs` 에 `base: '/<저장소 이름>'` 을 추가한다.
+## legacy 폴더
+
+2026-10-04 이 사이트로 바꾸기 전의 수제 HTML 블로그(글 3개, 글쓰기 페이지)를 그대로 보관한다. 이전 커밋 기록도 함께 남아 있다. `dist/` 만 배포되므로 사이트에는 나오지 않는다. 다시 공개하려면 `public/legacy/` 로 옮기면 `/legacy/` 주소로 나온다.
 
 ## 왜 Astro인가
 
 | 후보 | 장점 | 이 사이트에서의 단점 |
 |---|---|---|
-| **Astro (선택)** | 마크다운 글 관리, 공통 틀, 설정 기반 메뉴. 결과물은 순수 HTML이라 빠르다. 이 PC에 Node가 이미 있어 바로 미리 보기 가능 | 빌드 단계가 있어 GitHub Actions 설정이 필요(이미 포함) |
-| Jekyll | GitHub Pages가 직접 빌드해 줘서 설정이 가장 적다 | 미리 보기에 Ruby 설치가 필요(이 PC에 없음). 허용 플러그인 제한 |
-| 순수 HTML/JS | 도구가 전혀 필요 없다 | 글마다 HTML을 직접 만들거나 목록을 손으로 관리해야 해서 블로그가 커질수록 불편 |
+| **Astro (선택)** | 마크다운 글 관리, 사이트별 레이아웃 분리가 쉽다. 결과물은 순수 HTML이라 빠르다. 이 PC에 Node가 이미 있어 바로 미리 보기 가능 | 빌드 단계가 있어 GitHub Actions 설정이 필요(포함됨) |
+| Jekyll | GitHub Pages가 직접 빌드해 줘서 설정이 가장 적다 | 미리 보기에 Ruby 설치 필요(이 PC에 없음). 허용 플러그인 제한 |
+| 순수 HTML/JS | 도구가 전혀 필요 없다 | 글마다 HTML을 만들고 목록을 손으로 관리해야 해서 블로그가 커질수록 불편 |
 
 ## 의존성
 
