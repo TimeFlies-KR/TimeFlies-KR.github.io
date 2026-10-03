@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>팀 스파르타 2일차 — TimeFlies</title>
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1 class="site-name"><a href="../index.html">Time<span>Flies</span></a></h1>
+    <nav>
+      <a href="../index.html">← 목록으로</a>
+    </nav>
+  </header>
+
+  <article class="post">
+    <div class="date">2026. 09. 01</div>
+    <span class="tag" style="color:var(--amber);border-color:var(--amber);">게임개발</span>
+    <h1 class="post-title">팀 스파르타 2일차</h1>
+    <div class="post-body">
+<h2>클래스와 객체</h2>
+<h3>클래스</h3>
+<p>같이 다녀야 하는 값을 하나의 모양으로 묶기 위해 사용한다</p>
+<p>ex)빵틀, 설계도</p>
+<h3>객체</h3>
+<p>클래스라는 설계도를 바탕으로 만들어진 완성품</p>
+<h3>생성자</h3>
+<p>객체를 만들때 필요한 값을 빠뜨리지 않도록 입력을 강제하고 정의 하는 방법</p>
+<hr>
+<h2>접근 제어자와 캡슐화</h2>
+<h3>접근 제어자</h3>
+<p><strong>public</strong>: 모든 곳에서 접근 가능</p>
+<p><strong>protected</strong>: 같은 패키지 및 상속 관계의 클래스에서 접근 가능</p>
+<p><strong>default (키워드 없음)</strong>: 같은 패키지 내부에서만 접근 가능</p>
+<p><strong>private</strong>: 같은 클래스 내부에서만 접근 가능</p>
+<h3>캡슐화</h3>
+<p>객체의 데이터(필드)를 private으로 숨겨 보호하고, 검증된 기능(메서드)만 외부에 안전하게 공개하는 것
+.</p>
+<h3>Getter, Setter</h3>
+<p><strong>Getter와 Setter</strong>: private 필드의 값을 외부에서 안전하게 조회(Getter)하거나 변경(Setter)할 수 있도록 제공하는 메서드
+.</p>
+<hr>
+<h2>기본 타입과 참조 타입</h2>
+<p><strong>기본 타입(Primitive Type)</strong>: boolean, int, double 등 실제 데이터 값을 직접 변수에 저장하는 타입  </p>
+<p>속성이나 기능을 가질 수 없다.</p>
+<p><strong>참조 타입(Reference Type)</strong>: 객체를 담는 변수이며, 데이터가 저장된 실제 메모리 주소(Heap 영역 주소)를 가리킨다.</p>
+<p>참조 타입 간의 비교 시 단순 값 비교와 객체 주소 비교를 유의해야 한다</p>
+<p><strong>래퍼 클래스(Wrapper Class)</strong>: 기본 자료형을 객체로 감싸서 편리한 데이터 처리를 위한 기능들을 제공하도록 돕는 클래스</p>
+<p><strong>사용 이유</strong> : 기본 자료형과 관련된 메서드를 사용할 수 있다.</p>
+<hr>
+<h2>자료구조</h2>
+<p><strong>배열</strong> : 동일한 타입의 값 여러 개를 한 번에 담는 도구이나, 한 번 정한 크기는 바꿀 수 없다.</p>
+<p><strong>시간 복잡도</strong> : 데이터를 찾아오는 속도, 0(n)이 클수록 느리다 
+ex) for(int i =1; i&lt;n;i++) 0(n)</p>
+<p><strong>주요 자료구조</strong>:</p>
+<p><strong>List</strong>: 순서대로 값을 쌓아두는 목록으로, 동적으로 크기가 늘어난다. 0(n)</p>
+<p><strong>Map</strong>: 키(Key)와 값(Value)의 쌍으로 값을 식별하여 저장하고 꺼내는 저장소 0(1)</p>
+<p><strong>Set</strong>: 순서를 보장하지 않으며 중복된 값을 알아서 걸러주는 모음 구조 0(1)</p>
+<hr>
+<h2>Static</h2>
+<p><strong>static</strong> : 정적, 메모리 주소값이 고정되어 있다.</p>
+<p>프로그램이 시작될때 메모리에 미리 올라가기 때문에 객채를 생성하지 않고도 바로 사용 할 수있다.</p>
+<p>객체를 만들어서 변경을 시도하면 객체에 있는 내용이 변경되는 것이 아니라 클래스에 있는 내용이 변하기 때문에 사용에 주의해야 함.</p>
+<p>ex) bread b1 = new bread();</p>
+<p>bread b2 = new bread();</p>
+<p>b1.name = &quot;소보로빵&quot;;
+b2.name = &quot;피자빵&quot;;</p>
+<p>System.out.println(b1.name);
+System.out.println(b2.name);</p>
+<p>의 출력값이 둘다 피자빵이 된다.</p>
+<hr>
+<h2>상속</h2>
+<p><strong>상속(Inheritance)</strong>: 기존 부모 클래스의 필드와 메서드를 물려받아 새로운 자식 클래스를 만드는 문법</p>
+<p>자식 클래스는 super 키워드를 사용해 부모 클래스의 생성자를 호출하여 초기화</p>
+<p><strong>오버로딩(Overloading)</strong>: 같은 이름의 메서드를 매개변수의 타입이나 개수만 다르게 하여 여러 개 정의하는 것</p>
+<p><strong>오버라이딩(Overriding)</strong>: 상속 관계에서 부모의 메서드를 자식 클래스에 맞춰 다시 재정의하는 것</p>
+<p>@Override 어노테이션으로 컴파일러에 재정의 의도를 전달할 수 있다.</p>
+<p><strong>어노테이션</strong>: 클래스,메서드,필드등의 코드의 부가 정도를 표시하는 문법</p>
+<p>@기호로 시작하며, 컴파일러나 프레임 워크가 코드를 검사하거나 특별한 방식으로 처리할때 사용</p>
+<hr>
+<h2>추상 클래스와 인터페이스</h2>
+<p><strong>인터페이스(Interface)</strong>: 구현 세부 정보를 숨긴 채 &quot;어떻게 만들어야 한다&quot;는 약속/규격(명세)만 정의하여 통일된 소통 구조를 만듬</p>
+<p><strong>추상 클래스(Abstract Class)</strong>: 자식 클래스들이 공유할 공통 코드를 담고 반드시 채워야 할 메서드를 정의하는 클래스로, new 키워드로 직접 객체를 생성하는 것이 불가능</p>
+<p><strong>다형성(Polymorphism)</strong>: 동일한 메서드 호출이더라도 실제 어떤 객체(구현체)이냐에 따라 서로 다르게 동작하는 성질을 뜻함</p>
+<p><strong>final</strong>: 변수(상수화), 메서드(오버라이딩 불가), 클래스(상속 불가) 등에 불변 속성을 부여하는 키워드</p>
+
+    </div>
+  </article>
+
+  <footer>
+    <span>© 2026 TimeFlies</span>
+    <div>
+      <a href="../index.html">목록으로</a>
+    </div>
+  </footer>
+
+</div>
+<!-- write.html에서 이 글을 다시 불러와 수정할 수 있도록 원본을 저장해둔 부분입니다. 지우지 마세요. -->
+<script type="application/json" id="post-data">"eyJ0aXRsZSI6Iu2MgCDsiqTtjIzrpbTtg4AgMuydvOywqCIsInRhZyI6IuqyjOyehOqwnOuwnCIsImV4Y2VycHQiOiLsm7kgY3PsmYAgSmF2Yeq4sOy0iCIsImRhdGUiOiIyMDI2LiAwOS4gMDEiLCJib2R5IjoiIyMg7YG0656Y7Iqk7JmAIOqwneyytFxuXG4jIyMgIO2BtOuemOyKpFxu6rCZ7J20IOuLpOuFgOyVvCDtlZjripQg6rCS7J2EIO2VmOuCmOydmCDrqqjslpHsnLzroZwg66y26riwIOychO2VtCDsgqzsmqntlZzri6RcblxuZXgp67m17YuALCDshKTqs4Trj4RcblxuIyMjIOqwneyytFxu7YG0656Y7Iqk652864qUIOyEpOqzhOuPhOulvCDrsJTtg5XsnLzroZwg66eM65Ok7Ja07KeEIOyZhOyEse2SiFxuXG4jIyMg7IOd7ISx7J6QXG5cbuqwneyytOulvCDrp4zrk6TrlYwg7ZWE7JqU7ZWcIOqwkuydhCDruaDrnKjrpqzsp4Ag7JWK64+E66GdIOyeheugpeydhCDqsJXsoJztlZjqs6Ag7KCV7J2YIO2VmOuKlCDrsKnrspVcblxuLS0tXG4jIyDsoJHqt7wg7KCc7Ja07J6Q7JmAIOy6oeyKkO2ZlFxuXG4jIyMg7KCR6re8IOygnOyWtOyekFxuKipwdWJsaWMqKjog66qo65OgIOqzs+yXkOyEnCDsoJHqt7wg6rCA64qlXG5cbioqcHJvdGVjdGVkKio6IOqwmeydgCDtjKjtgqTsp4Ag67CPIOyDgeyGjSDqtIDqs4TsnZgg7YG0656Y7Iqk7JeQ7IScIOygkeq3vCDqsIDriqVcblxuKipkZWZhdWx0ICjtgqTsm4zrk5wg7JeG7J2MKSoqOiDqsJnsnYAg7Yyo7YKk7KeAIOuCtOu2gOyXkOyEnOunjCDsoJHqt7wg6rCA64qlXG5cbioqcHJpdmF0ZSoqOiDqsJnsnYAg7YG0656Y7IqkIOuCtOu2gOyXkOyEnOunjCDsoJHqt7wg6rCA64qlXG4jIyMg7Lqh7IqQ7ZmUXG7qsJ3ssrTsnZgg642w7J207YSwKO2VhOuTnCnrpbwgcHJpdmF0ZeycvOuhnCDsiKjqsqgg67O07Zi47ZWY6rOgLCDqsoDspp3rkJwg6riw64qlKOuplOyEnOuTnCnrp4wg7Jm467aA7JeQIOyViOyghO2VmOqyjCDqs7XqsJztlZjripQg6rKDXG4uXG4jIyMgR2V0dGVyLCBTZXR0ZXJcbioqR2V0dGVy7JmAIFNldHRlcioqOiBwcml2YXRlIO2VhOuTnOydmCDqsJLsnYQg7Jm467aA7JeQ7IScIOyViOyghO2VmOqyjCDsobDtmowoR2V0dGVyKe2VmOqxsOuCmCDrs4Dqsr0oU2V0dGVyKe2VoCDsiJgg7J6I64+E66GdIOygnOqzte2VmOuKlCDrqZTshJzrk5xcbi5cblxuLS0tXG4jIyDquLDrs7gg7YOA7J6F6rO8IOywuOyhsCDtg4DsnoVcbioq6riw67O4IO2DgOyehShQcmltaXRpdmUgVHlwZSkqKjogYm9vbGVhbiwgaW50LCBkb3VibGUg65OxIOyLpOygnCDrjbDsnbTthLAg6rCS7J2EIOyngeygkSDrs4DsiJjsl5Ag7KCA7J6l7ZWY64qUIO2DgOyehSAgXG5cbuyGjeyEseydtOuCmCDquLDriqXsnYQg6rCA7KeIIOyImCDsl4bri6QuXG5cblxuKirssLjsobAg7YOA7J6FKFJlZmVyZW5jZSBUeXBlKSoqOiDqsJ3ssrTrpbwg64u064qUIOuzgOyImOydtOupsCwg642w7J207YSw6rCAIOyggOyepeuQnCDsi6TsoJwg66mU66qo66asIOyjvOyGjChIZWFwIOyYgeyXrSDso7zshowp66W8IOqwgOumrO2CqOuLpC5cblxu7LC47KGwIO2DgOyehSDqsITsnZgg67mE6rWQIOyLnCDri6jsiJwg6rCSIOu5hOq1kOyZgCDqsJ3ssrQg7KO87IaMIOu5hOq1kOulvCDsnKDsnZjtlbTslbwg7ZWc64ukXG5cbioq656Y7Y28IO2BtOuemOyKpChXcmFwcGVyIENsYXNzKSoqOiDquLDrs7gg7J6Q66OM7ZiV7J2EIOqwneyytOuhnCDqsJDsi7jshJwg7Y6466as7ZWcIOuNsOydtO2EsCDsspjrpqzrpbwg7JyE7ZWcIOq4sOuKpeuTpOydhCDsoJzqs7XtlZjrj4TroZ0g64+V64qUIO2BtOuemOyKpFxuXG4qKuyCrOyaqSDsnbTsnKAqKiA6IOq4sOuzuCDsnpDro4ztmJXqs7wg6rSA66Co65CcIOuplOyEnOuTnOulvCDsgqzsmqntlaAg7IiYIOyeiOuLpC5cblxuLS0tXG4jIyDsnpDro4zqtazsobBcbioq67Cw7Je0KiogOiDrj5nsnbztlZwg7YOA7J6F7J2YIOqwkiDsl6zrn6wg6rCc66W8IO2VnCDrsojsl5Ag64u064qUIOuPhOq1rOydtOuCmCwg7ZWcIOuyiCDsoJXtlZwg7YGs6riw64qUIOuwlOq/gCDsiJgg7JeG64ukLlxuXG4qKuyLnOqwhCDrs7XsnqHrj4QqKiA6IOuNsOydtO2EsOulvCDssL7slYTsmKTripQg7IaN64+ELCAwKG4p7J20IO2BtOyImOuhnSDripDrpqzri6QgXG5leCkgZm9yKGludCBpID0xOyBpPG47aSsrKSAwKG4pXG5cbioq7KO87JqUIOyekOujjOq1rOyhsCoqOlxuXG4qKkxpc3QqKjog7Iic7ISc64yA66GcIOqwkuydhCDsjJPslYTrkZDripQg66qp66Gd7Jy866GcLCDrj5nsoIHsnLzroZwg7YGs6riw6rCAIOuKmOyWtOuCnOuLpC4gMChuKVxuXG4qKk1hcCoqOiDtgqQoS2V5KeyZgCDqsJIoVmFsdWUp7J2YIOyMjeycvOuhnCDqsJLsnYQg7Iud67OE7ZWY7JesIOyggOyepe2VmOqzoCDqurzrgrTripQg7KCA7J6l7IaMIDAoMSlcblxuKipTZXQqKjog7Iic7ISc66W8IOuztOyepe2VmOyngCDslYrsnLzrqbAg7KSR67O165CcIOqwkuydhCDslYzslYTshJwg6rG465+s7KO864qUIOuqqOydjCDqtazsobAgMCgxKVxuXG4tLS1cbiMjIFN0YXRpY1xuKipzdGF0aWMqKiA6IOygleyggSwg66mU66qo66asIOyjvOyGjOqwkuydtCDqs6DsoJXrkJjslrQg7J6I64ukLlxuXG7tlITroZzqt7jrnqjsnbQg7Iuc7J6R65Cg65WMIOuplOuqqOumrOyXkCDrr7jrpqwg7Jis65286rCA6riwIOuVjOusuOyXkCDqsJ3ssYTrpbwg7IOd7ISx7ZWY7KeAIOyViuqzoOuPhCDrsJTroZwg7IKs7JqpIO2VoCDsiJjsnojri6QuXG5cbuqwneyytOulvCDrp4zrk6TslrTshJwg67OA6rK97J2EIOyLnOuPhO2VmOuptCDqsJ3ssrTsl5Ag7J6I64qUIOuCtOyaqeydtCDrs4Dqsr3rkJjripQg6rKD7J20IOyVhOuLiOudvCDtgbTrnpjsiqTsl5Ag7J6I64qUIOuCtOyaqeydtCDrs4DtlZjquLAg65WM66y47JeQIOyCrOyaqeyXkCDso7zsnZjtlbTslbwg7ZWoLlxuXG5leCkgYnJlYWQgYjEgPSBuZXcgYnJlYWQoKTtcblxuYnJlYWQgYjIgPSBuZXcgYnJlYWQoKTtcblxuYjEubmFtZSA9IFwi7IaM67O066Gc67m1XCI7XG5iMi5uYW1lID0gXCLtlLzsnpDrubVcIjtcblxuU3lzdGVtLm91dC5wcmludGxuKGIxLm5hbWUpO1xuU3lzdGVtLm91dC5wcmludGxuKGIyLm5hbWUpO1xuXG7snZgg7Lac66Cl6rCS7J20IOuRmOuLpCDtlLzsnpDrubXsnbQg65Cc64ukLlxuXG4tLS1cbiMjIOyDgeyGjVxuKirsg4Hsho0oSW5oZXJpdGFuY2UpKio6IOq4sOyhtCDrtoDrqqgg7YG0656Y7Iqk7J2YIO2VhOuTnOyZgCDrqZTshJzrk5zrpbwg66y866Ck67Cb7JWEIOyDiOuhnOyatCDsnpDsi50g7YG0656Y7Iqk66W8IOunjOuTnOuKlCDrrLjrspVcblxu7J6Q7IudIO2BtOuemOyKpOuKlCBzdXBlciDtgqTsm4zrk5zrpbwg7IKs7Jqp7ZW0IOu2gOuqqCDtgbTrnpjsiqTsnZgg7IOd7ISx7J6Q66W8IO2YuOy2nO2VmOyXrCDstIjquLDtmZRcblxuKirsmKTrsoTroZzrlKkoT3ZlcmxvYWRpbmcpKio6IOqwmeydgCDsnbTrpoTsnZgg66mU7ISc65Oc66W8IOunpOqwnOuzgOyImOydmCDtg4DsnoXsnbTrgpgg6rCc7IiY66eMIOuLpOultOqyjCDtlZjsl6wg7Jes65+sIOqwnCDsoJXsnZjtlZjripQg6rKDXG5cbioq7Jik67KE65287J2065SpKE92ZXJyaWRpbmcpKio6IOyDgeyGjSDqtIDqs4Tsl5DshJwg67aA66qo7J2YIOuplOyEnOuTnOulvCDsnpDsi50g7YG0656Y7Iqk7JeQIOunnuy2sCDri6Tsi5wg7J6s7KCV7J2Y7ZWY64qUIOqyg1xuXG5AT3ZlcnJpZGUg7Ja064W47YWM7J207IWY7Jy866GcIOy7tO2MjOydvOufrOyXkCDsnqzsoJXsnZgg7J2Y64+E66W8IOyghOuLrO2VoCDsiJgg7J6I64ukLlxuXG4qKuyWtOuFuO2FjOydtOyFmCoqOiDtgbTrnpjsiqQs66mU7ISc65OcLO2VhOuTnOuTseydmCDsvZTrk5zsnZgg67aA6rCAIOygleuPhOulvCDtkZzsi5ztlZjripQg66y467KVXG5cbkDquLDtmLjroZwg7Iuc7J6R7ZWY66mwLCDsu7TtjIzsnbzrn6zrgpgg7ZSE66CI7J6EIOybjO2BrOqwgCDsvZTrk5zrpbwg6rKA7IKs7ZWY6rGw64KYIO2KueuzhO2VnCDrsKnsi53snLzroZwg7LKY66as7ZWg65WMIOyCrOyaqVxuXG5cblxuLS0tXG5cbiMjIOy2lOyDgSDtgbTrnpjsiqTsmYAg7J247YSw7Y6Y7J207IqkXG4qKuyduO2EsO2OmOydtOyKpChJbnRlcmZhY2UpKio6IOq1rO2YhCDshLjrtoAg7KCV67O066W8IOyIqOq4tCDssYQgXCLslrTrlrvqsowg66eM65Ok7Ja07JW8IO2VnOuLpFwi64qUIOyVveyGjS/qt5zqsqko66qF7IS4KeunjCDsoJXsnZjtlZjsl6wg7Ya17J2865CcIOyGjO2GtSDqtazsobDrpbwg66eM65OsXG5cbioq7LaU7IOBIO2BtOuemOyKpChBYnN0cmFjdCBDbGFzcykqKjog7J6Q7IudIO2BtOuemOyKpOuTpOydtCDqs7XsnKDtlaAg6rO17Ya1IOy9lOuTnOulvCDri7Tqs6Ag67CY65Oc7IucIOyxhOybjOyVvCDtlaAg66mU7ISc65Oc66W8IOygleydmO2VmOuKlCDtgbTrnpjsiqTroZwsIG5ldyDtgqTsm4zrk5zroZwg7KeB7KCRIOqwneyytOulvCDsg53shLHtlZjripQg6rKD7J20IOu2iOqwgOuKpVxuXG4qKuuLpO2YleyEsShQb2x5bW9ycGhpc20pKio6IOuPmeydvO2VnCDrqZTshJzrk5wg7Zi47Lac7J20642U652864+EIOyLpOygnCDslrTrlqQg6rCd7LK0KOq1rO2YhOyytCnsnbTrg5Dsl5Ag65Sw6528IOyEnOuhnCDri6TrpbTqsowg64+Z7J6R7ZWY64qUIOyEseyniOydhCDrnLvtlahcblxuKipmaW5hbCoqOiDrs4DsiJgo7IOB7IiY7ZmUKSwg66mU7ISc65OcKOyYpOuyhOudvOydtOuUqSDrtojqsIApLCDtgbTrnpjsiqQo7IOB7IaNIOu2iOqwgCkg65Ox7JeQIOu2iOuzgCDsho3shLHsnYQg67aA7Jes7ZWY64qUIO2CpOybjOuTnFxuIn0="</script>
+</body>
+</html>

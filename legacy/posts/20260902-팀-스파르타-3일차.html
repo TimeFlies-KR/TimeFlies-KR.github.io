@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>팀 스파르타 3일차 — TimeFlies</title>
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1 class="site-name"><a href="../index.html">Time<span>Flies</span></a></h1>
+    <nav>
+      <a href="../index.html">← 목록으로</a>
+    </nav>
+  </header>
+
+  <article class="post">
+    <div class="date">2026. 09. 02</div>
+    <span class="tag" style="color:var(--amber);border-color:var(--amber);">게임개발</span>
+    <h1 class="post-title">팀 스파르타 3일차</h1>
+    <div class="post-body">
+<p><strong>3 Layer</strong></p>
+<p>하나의 클래스로 모든 API를 처리하면 코드가 복잡해지고 유지보수의 비용이 증가하기에 서버에서의 처리과정을 Controller &lt;--&gt; Service &lt;--&gt; Repository 3개의 계층으로 분리하여 코드 가독성과 유지보수를 쉽게 처리하게 끔 처리</p>
+<p><strong>Controller</strong> : 클라이언트의 요청을 받고 로직처리를 Service로 넘김, Service에서 처리된 결과를 클라이언트에게 전달</p>
+<p><strong>Service</strong> : 사용자의 요구사항을 처리하는 실세 중의 실세 DB 관련 처리는 Repository에게 요청</p>
+<p><strong>Repository</strong> : DB 관리 및 CRUD 작업 처</p>
+
+    </div>
+  </article>
+
+  <footer>
+    <span>© 2026 TimeFlies</span>
+    <div>
+      <a href="../index.html">목록으로</a>
+    </div>
+  </footer>
+
+</div>
+<!-- write.html에서 이 글을 다시 불러와 수정할 수 있도록 원본을 저장해둔 부분입니다. 지우지 마세요. -->
+<script type="application/json" id="post-data">"eyJ0aXRsZSI6Iu2MgCDsiqTtjIzrpbTtg4AgM+ydvOywqCIsInRhZyI6IuqyjOyehOqwnOuwnCIsImV4Y2VycHQiOiJTcHJpbmcg7J6F66y4IiwiZGF0ZSI6IjIwMjYuIDA5LiAwMiIsImJvZHkiOiIqKjMgTGF5ZXIqKlxuXG7tlZjrgpjsnZgg7YG0656Y7Iqk66GcIOuqqOuToCBBUEnrpbwg7LKY66as7ZWY66m0IOy9lOuTnOqwgCDrs7XsnqHtlbTsp4Dqs6Ag7Jyg7KeA67O07IiY7J2YIOu5hOyaqeydtCDspp3qsIDtlZjquLDsl5Ag7ISc67KE7JeQ7ISc7J2YIOyymOumrOqzvOygleydhCBDb250cm9sbGVyIDwtLT4gU2VydmljZSA8LS0+IFJlcG9zaXRvcnkgM+qwnOydmCDqs4TsuLXsnLzroZwg67aE66as7ZWY7JesIOy9lOuTnCDqsIDrj4XshLHqs7wg7Jyg7KeA67O07IiY66W8IOyJveqyjCDsspjrpqztlZjqsowg64GUIOyymOumrFxuXG4qKkNvbnRyb2xsZXIqKiA6IO2BtOudvOydtOyWuO2KuOydmCDsmpTssq3snYQg67Cb6rOgIOuhnOyngeyymOumrOulvCBTZXJ2aWNl66GcIOuEmOq5gCwgU2VydmljZeyXkOyEnCDsspjrpqzrkJwg6rKw6rO866W8IO2BtOudvOydtOyWuO2KuOyXkOqyjCDsoITri6xcblxuKipTZXJ2aWNlKiogOiDsgqzsmqnsnpDsnZgg7JqU6rWs7IKs7ZWt7J2EIOyymOumrO2VmOuKlCDsi6TshLgg7KSR7J2YIOyLpOyEuCBEQiDqtIDroKgg7LKY66as64qUIFJlcG9zaXRvcnnsl5Dqsowg7JqU7LKtXG5cbioqUmVwb3NpdG9yeSoqIDogREIg6rSA66asIOuwjyBDUlVEIOyekeyXhSDsspgifQ=="</script>
+</body>
+</html>
