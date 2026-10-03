@@ -1,0 +1,57 @@
+---
+// 켜진 섹션마다 /<id>/ 페이지를 하나씩 만든다. 꺼진 섹션은 페이지 자체가 생성되지 않는다.
+import { getEntry, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { enabledSections, url, formatDate, type Section } from '../../site.config';
+import { getEntries } from '../../lib/entries';
+
+export function getStaticPaths() {
+  return enabledSections.map((section) => ({ params: { section: section.id }, props: { section } }));
+}
+
+const { section } = Astro.props as { section: Section };
+
+let page = null;
+let Content = null;
+let entries: Awaited<ReturnType<typeof getEntries>> = [];
+
+if (section.kind === 'page') {
+  page = await getEntry('pages', section.id);
+  if (!page) throw new Error(`src/content/pages/${section.id}.md 가 없습니다.`);
+  ({ Content } = await render(page));
+} else {
+  entries = await getEntries(section.collection);
+}
+---
+
+<Base title={section.label} description={page?.data.description ?? section.summary} current={section.id}>
+  {
+    page && Content ? (
+      <article class="prose">
+        <h1>{page.data.title}</h1>
+        {page.data.description && <p class="lead">{page.data.description}</p>}
+        <Content />
+      </article>
+    ) : (
+      <>
+        <h1>{section.label}</h1>
+        <p class="lead">{section.summary}</p>
+        {entries.length === 0 ? (
+          <p class="meta">아직 글이 없습니다.</p>
+        ) : (
+          <ul class="post-list">
+            {entries.map((entry) => (
+              <li>
+                <a href={url(`${section.id}/${entry.id}/`)}>
+                  <h3>{entry.data.title}</h3>
+                  <p>{entry.data.description}</p>
+                  <span class="meta">{formatDate(entry.data.date)}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </>
+    )
+  }
+</Base>

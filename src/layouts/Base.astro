@@ -1,0 +1,56 @@
+---
+import '../styles/global.css';
+import { site, enabledSections, url } from '../site.config';
+
+interface Props {
+  title?: string;
+  description?: string;
+  current?: string;
+}
+
+const { title, description = site.description, current } = Astro.props;
+const pageTitle = title ? `${title} · ${site.title}` : site.title;
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href={url('favicon.svg')} type="image/svg+xml" />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="brand" href={url()}>{site.title}</a>
+        <nav aria-label="주 메뉴">
+          <ul>
+            {
+              enabledSections.map((s) => (
+                <li>
+                  <a href={url(`${s.id}/`)} aria-current={current === s.id ? 'page' : undefined}>
+                    {s.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <span>© {new Date().getFullYear()} {site.author}</span>
+        <a href={site.github}>GitHub</a>
+      </div>
+    </footer>
+  </body>
+</html>

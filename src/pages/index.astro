@@ -1,0 +1,51 @@
+---
+import Base from '../layouts/Base.astro';
+import { site, enabledSections, url, formatDate } from '../site.config';
+import { getEntries } from '../lib/entries';
+
+const blogOn = enabledSections.some((s) => s.id === 'blog');
+const latest = blogOn ? (await getEntries('blog')).slice(0, 3) : [];
+---
+
+<Base>
+  <section class="hero">
+    <p class="eyebrow">{site.author}</p>
+    <h1>{site.title}</h1>
+    <p class="lead">{site.tagline}</p>
+  </section>
+
+  <ul class="cards">
+    {
+      enabledSections.map((s) => (
+        <li>
+          <a class="card" href={url(`${s.id}/`)}>
+            <h2>{s.label}</h2>
+            <p>{s.summary}</p>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  {
+    latest.length > 0 && (
+      <section>
+        <div class="section-head">
+          <h2>최근 글</h2>
+          <a href={url('blog/')}>전체 보기</a>
+        </div>
+        <ul class="post-list">
+          {latest.map((post) => (
+            <li>
+              <a href={url(`blog/${post.id}/`)}>
+                <h3>{post.data.title}</h3>
+                <p>{post.data.description}</p>
+                <span class="meta">{formatDate(post.data.date)}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+</Base>
