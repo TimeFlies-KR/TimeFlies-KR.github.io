@@ -1,0 +1,28 @@
+---
+// 모든 페이지의 가장 바깥 틀(html·head). 머리글·메뉴는 각 사이트 레이아웃이 직접 그린다.
+import '../styles/base.css';
+import { url } from '../lib/util';
+
+interface Props {
+  title: string;
+  description: string;
+  site: 'hub' | 'company' | 'blog' | 'about';
+}
+
+const { title, description, site } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href={url('favicon.svg')} type="image/svg+xml" />
+    <title>{title}</title>
+  </head>
+  <body data-site={site}>
+    <slot />
+  </body>
+</html>

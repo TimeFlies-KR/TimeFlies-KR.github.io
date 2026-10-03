@@ -1,0 +1,21 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import { blog } from '../../data/blog';
+import PostList from '../../components/PostList.astro';
+import { getEntries } from '../../lib/entries';
+
+const posts = await getEntries('blog');
+---
+
+<BlogLayout current="posts">
+  <h1>{blog.name}</h1>
+  <p class="lead">{blog.tagline}</p>
+  <PostList posts={posts} />
+</BlogLayout>
+
+<style>
+  h1 {
+    font-size: clamp(1.9rem, 6vw, 2.6rem);
+    margin: 0 0 4px;
+  }
+</style>

@@ -1,0 +1,38 @@
+---
+import Shell from './Shell.astro';
+import { company } from '../data/company';
+import { url } from '../lib/util';
+
+interface Props {
+  title?: string;
+  description?: string;
+  current?: 'home' | 'games';
+}
+
+const { title, description = company.tagline, current } = Astro.props;
+const fullName = `${company.name} ${company.suffix}`;
+---
+
+<Shell title={title ? `${title} · ${fullName}` : fullName} description={description} site="company">
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href={url('company/')}>{company.name} <em>{company.suffix}</em></a>
+      <nav aria-label="회사 메뉴">
+        <ul>
+          <li><a href={url('company/#about')}>소개</a></li>
+          <li><a href={url('company/games/')} aria-current={current === 'games' ? 'page' : undefined}>게임</a></li>
+          <li><a href={url('company/#contact')}>연락처</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <slot />
+  </main>
+  <footer class="bottom">
+    <div class="wrap">
+      <span>© {new Date().getFullYear()} {fullName}</span>
+      <a href={url()}>TimeFlies 전체 보기</a>
+    </div>
+  </footer>
+</Shell>

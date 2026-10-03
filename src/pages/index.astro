@@ -1,51 +1,90 @@
 ---
-import Base from '../layouts/Base.astro';
-import { site, enabledSections, url, formatDate } from '../site.config';
-import { getEntries } from '../lib/entries';
+// 합본 첫 화면: 세 사이트로 이동만 한다.
+import Shell from '../layouts/Shell.astro';
+import { url } from '../lib/util';
 
-const blogOn = enabledSections.some((s) => s.id === 'blog');
-const latest = blogOn ? (await getEntries('blog')).slice(0, 3) : [];
+const sites = [
+  { href: 'company/', name: '회사 소개', summary: '팀과 만들고 있는 게임', site: 'company' },
+  { href: 'blog/', name: '개발 블로그', summary: '제작하면서 배운 것과 작업 일지', site: 'blog' },
+  { href: 'about/', name: '자기 소개', summary: '만드는 사람의 포트폴리오', site: 'about' },
+];
 ---
 
-<Base>
-  <section class="hero">
-    <p class="eyebrow">{site.author}</p>
-    <h1>{site.title}</h1>
-    <p class="lead">{site.tagline}</p>
-  </section>
+<Shell title="TimeFlies" description="TimeFlies의 회사 소개, 개발 블로그, 자기 소개" site="hub">
+  <main class="wrap hub">
+    <h1>TimeFlies</h1>
+    <p class="lead">어디로 가시겠어요?</p>
+    <ul class="doors">
+      {
+        sites.map((s) => (
+          <li data-site={s.site}>
+            <a href={url(s.href)}>
+              <strong>{s.name}</strong>
+              <span>{s.summary}</span>
+              <span class="arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </main>
+</Shell>
 
-  <ul class="cards">
-    {
-      enabledSections.map((s) => (
-        <li>
-          <a class="card" href={url(`${s.id}/`)}>
-            <h2>{s.label}</h2>
-            <p>{s.summary}</p>
-          </a>
-        </li>
-      ))
-    }
-  </ul>
-
-  {
-    latest.length > 0 && (
-      <section>
-        <div class="section-head">
-          <h2>최근 글</h2>
-          <a href={url('blog/')}>전체 보기</a>
-        </div>
-        <ul class="post-list">
-          {latest.map((post) => (
-            <li>
-              <a href={url(`blog/${post.id}/`)}>
-                <h3>{post.data.title}</h3>
-                <p>{post.data.description}</p>
-                <span class="meta">{formatDate(post.data.date)}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </section>
-    )
+<style>
+  .hub {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 64px;
+    padding-bottom: 64px;
   }
-</Base>
+
+  h1 {
+    font-size: clamp(2.4rem, 8vw, 3.6rem);
+    margin: 0;
+  }
+
+  .doors {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    gap: 16px;
+  }
+
+  .doors a {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-height: 180px;
+    padding: 24px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--accent);
+    border-radius: var(--radius);
+    color: var(--text);
+    text-decoration: none;
+    transition: transform 0.15s, border-color 0.15s;
+  }
+
+  .doors a:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+  }
+
+  .doors strong {
+    font-size: 1.4rem;
+  }
+
+  .doors span {
+    color: var(--muted);
+  }
+
+  .doors .arrow {
+    margin-top: auto;
+    color: var(--accent);
+    font-size: 1.4rem;
+  }
+</style>

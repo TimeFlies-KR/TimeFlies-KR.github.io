@@ -1,0 +1,28 @@
+---
+import BlogLayout from '../../../layouts/BlogLayout.astro';
+import { getEntries } from '../../../lib/entries';
+import { url } from '../../../lib/util';
+
+const posts = await getEntries('blog');
+const counts = new Map<string, number>();
+for (const p of posts) for (const t of p.data.tags) counts.set(t, (counts.get(t) ?? 0) + 1);
+const tags = [...counts].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'ko'));
+---
+
+<BlogLayout title="태그" current="tags">
+  <h1>태그</h1>
+  <div class="tags">
+    {tags.map(([t, n]) => <a class="tag" href={url(`blog/tags/${t}/`)}>{t} · {n}</a>)}
+  </div>
+</BlogLayout>
+
+<style>
+  h1 {
+    margin: 0 0 20px;
+  }
+
+  .tag {
+    font-size: 0.95rem;
+    padding: 4px 14px;
+  }
+</style>

@@ -1,0 +1,70 @@
+---
+import { render } from 'astro:content';
+import CompanyLayout from '../../../layouts/CompanyLayout.astro';
+import { getEntries } from '../../../lib/entries';
+import { url } from '../../../lib/util';
+
+export async function getStaticPaths() {
+  return (await getEntries('games')).map((game) => ({ params: { slug: game.id }, props: { game } }));
+}
+
+const { game } = Astro.props;
+const { Content } = await render(game);
+const data = game.data;
+---
+
+<CompanyLayout title={data.title} description={data.description} current="games">
+  <div class="wrap narrow page">
+    <a href={url('company/games/')}>← 게임 목록</a>
+    <h1>{data.title}</h1>
+    <p class="lead">{data.description}</p>
+    <dl class="facts">
+      <dt>장르</dt>
+      <dd>{data.genre}</dd>
+      <dt>상태</dt>
+      <dd>{data.status}</dd>
+      {
+        data.platforms.length > 0 && (
+          <>
+            <dt>플랫폼</dt>
+            <dd>{data.platforms.join(', ')}</dd>
+          </>
+        )
+      }
+    </dl>
+    <article class="prose">
+      <Content />
+    </article>
+  </div>
+</CompanyLayout>
+
+<style>
+  .page {
+    padding-top: 40px;
+    padding-bottom: 72px;
+  }
+
+  h1 {
+    margin: 20px 0 4px;
+    font-size: clamp(1.8rem, 5vw, 2.4rem);
+  }
+
+  .facts {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 4px 20px;
+    margin: 0 0 16px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+
+  .facts dt {
+    color: var(--muted);
+  }
+
+  .facts dd {
+    margin: 0;
+  }
+</style>

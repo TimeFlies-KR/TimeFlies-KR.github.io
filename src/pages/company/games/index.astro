@@ -1,0 +1,49 @@
+---
+import CompanyLayout from '../../../layouts/CompanyLayout.astro';
+import { getEntries } from '../../../lib/entries';
+import { url } from '../../../lib/util';
+
+const games = await getEntries('games');
+---
+
+<CompanyLayout title="게임" current="games">
+  <div class="wrap page">
+    <h1>게임</h1>
+    <p class="lead">만들었거나 만들고 있는 게임입니다.</p>
+    <ul class="grid">
+      {
+        games.map((g) => (
+          <li>
+            <a class="card" href={url(`company/games/${g.id}/`)}>
+              <span class="tag">{g.data.status}</span>
+              <h2>{g.data.title}</h2>
+              <p>{g.data.description}</p>
+              <span class="meta">{g.data.genre}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</CompanyLayout>
+
+<style>
+  .page {
+    padding-top: 48px;
+    padding-bottom: 72px;
+  }
+
+  h1 {
+    margin: 0 0 4px;
+  }
+
+  h2 {
+    margin: 4px 0;
+    font-size: 1.2rem;
+  }
+
+  .card p {
+    margin: 0 0 8px;
+    color: var(--muted);
+  }
+</style>

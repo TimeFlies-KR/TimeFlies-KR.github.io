@@ -1,0 +1,37 @@
+---
+import Shell from './Shell.astro';
+import { about } from '../data/about';
+import { url } from '../lib/util';
+
+interface Props {
+  title?: string;
+}
+
+const { title } = Astro.props;
+const siteTitle = `${about.handle} · ${about.role}`;
+---
+
+<Shell title={title ? `${title} · ${about.handle}` : siteTitle} description={about.summary} site="about">
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href={url('about/')}>{about.handle}</a>
+      <nav aria-label="자기 소개 메뉴">
+        <ul>
+          <li><a href="#skills">기술</a></li>
+          <li><a href="#projects">프로젝트</a></li>
+          <li><a href="#timeline">이력</a></li>
+          <li><a href="#contact">연락처</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <slot />
+  </main>
+  <footer class="bottom">
+    <div class="wrap">
+      <span>© {new Date().getFullYear()} {about.handle}</span>
+      <a href={url()}>TimeFlies 전체 보기</a>
+    </div>
+  </footer>
+</Shell>

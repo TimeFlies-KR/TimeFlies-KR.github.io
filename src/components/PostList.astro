@@ -1,0 +1,86 @@
+---
+// 블로그 글 목록. 연도별로 묶어 보여 준다.
+import type { CollectionEntry } from 'astro:content';
+import { url, formatDate } from '../lib/util';
+
+interface Props {
+  posts: CollectionEntry<'blog'>[];
+}
+
+const { posts } = Astro.props;
+const years = [...new Set(posts.map((p) => p.data.date.getFullYear()))];
+---
+
+{posts.length === 0 && <p class="meta">아직 글이 없습니다.</p>}
+{
+  years.map((year) => (
+    <section>
+      <h2 class="year">{year}</h2>
+      <ul class="posts">
+        {posts
+          .filter((p) => p.data.date.getFullYear() === year)
+          .map((post) => (
+            <li>
+              <a href={url(`blog/${post.id}/`)}>
+                <h3>{post.data.title}</h3>
+                <p>{post.data.description}</p>
+              </a>
+              <span class="meta">{formatDate(post.data.date)}</span>
+              {post.data.tags.map((t) => (
+                <a class="tag" href={url(`blog/tags/${t}/`)}>
+                  {t}
+                </a>
+              ))}
+            </li>
+          ))}
+      </ul>
+    </section>
+  ))
+}
+
+<style>
+  .year {
+    font-size: 1rem;
+    color: var(--muted);
+    margin: 32px 0 4px;
+  }
+
+  .posts {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .posts li {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .posts li > a:first-child {
+    display: block;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .posts li > a:first-child:hover h3 {
+    color: var(--accent);
+  }
+
+  h3 {
+    margin: 0 0 2px;
+    font-size: 1.15rem;
+  }
+
+  p {
+    margin: 0 0 6px;
+    color: var(--muted);
+  }
+
+  .meta {
+    margin-right: 8px;
+  }
+
+  .tag {
+    margin-right: 4px;
+  }
+</style>

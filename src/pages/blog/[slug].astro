@@ -1,0 +1,82 @@
+---
+import { render } from 'astro:content';
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import { getEntries } from '../../lib/entries';
+import { url, formatDate } from '../../lib/util';
+
+export async function getStaticPaths() {
+  const posts = await getEntries('blog'); // 최신 글이 앞
+  return posts.map((post, i) => ({
+    params: { slug: post.id },
+    props: { post, newer: posts[i - 1], older: posts[i + 1] },
+  }));
+}
+
+const { post, newer, older } = Astro.props;
+const { Content } = await render(post);
+---
+
+<BlogLayout title={post.data.title} description={post.data.description}>
+  <article>
+    <header class="head">
+      <h1>{post.data.title}</h1>
+      <p class="meta">{formatDate(post.data.date)}</p>
+      <div class="tags">
+        {post.data.tags.map((t) => <a class="tag" href={url(`blog/tags/${t}/`)}>{t}</a>)}
+      </div>
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+
+  <nav class="pager" aria-label="이전·다음 글">
+    {older ? <a href={url(`blog/${older.id}/`)}><span>이전 글</span>{older.data.title}</a> : <span />}
+    {newer && <a class="next" href={url(`blog/${newer.id}/`)}><span>다음 글</span>{newer.data.title}</a>}
+  </nav>
+</BlogLayout>
+
+<style>
+  .head {
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  h1 {
+    font-size: clamp(1.7rem, 5vw, 2.3rem);
+    margin: 0 0 8px;
+  }
+
+  .head .meta {
+    margin: 0 0 8px;
+  }
+
+  .pager {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 56px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+
+  .pager a {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .pager a:hover {
+    color: var(--accent);
+  }
+
+  .pager span {
+    display: block;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  .pager .next {
+    text-align: right;
+  }
+</style>

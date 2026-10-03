@@ -1,0 +1,43 @@
+---
+import Shell from './Shell.astro';
+import { blog } from '../data/blog';
+import { url } from '../lib/util';
+
+interface Props {
+  title?: string;
+  description?: string;
+  current?: 'posts' | 'tags';
+}
+
+const { title, description = blog.tagline, current } = Astro.props;
+---
+
+<Shell title={title ? `${title} · ${blog.name}` : blog.name} description={description} site="blog">
+  <header class="top">
+    <div class="wrap narrow">
+      <a class="brand" href={url('blog/')}>{blog.name}</a>
+      <nav aria-label="블로그 메뉴">
+        <ul>
+          <li><a href={url('blog/')} aria-current={current === 'posts' ? 'page' : undefined}>전체 글</a></li>
+          <li><a href={url('blog/tags/')} aria-current={current === 'tags' ? 'page' : undefined}>태그</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main class="wrap narrow page">
+    <slot />
+  </main>
+  <footer class="bottom">
+    <div class="wrap narrow">
+      <span>© {new Date().getFullYear()} {blog.author}</span>
+      <a href={url()}>TimeFlies 전체 보기</a>
+    </div>
+  </footer>
+</Shell>
+
+<style>
+  .page {
+    padding-top: 40px;
+    padding-bottom: 72px;
+  }
+</style>

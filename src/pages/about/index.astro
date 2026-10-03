@@ -1,0 +1,208 @@
+---
+import AboutLayout from '../../layouts/AboutLayout.astro';
+import { about } from '../../data/about';
+import { url } from '../../lib/util';
+---
+
+<AboutLayout>
+  <section class="hero wrap">
+    <div class="avatar" aria-hidden="true">{about.handle.slice(0, 1)}</div>
+    <div>
+      <p class="eyebrow">{about.role}</p>
+      <h1>{about.name}</h1>
+      <p class="summary">{about.summary}</p>
+    </div>
+  </section>
+
+  <section id="skills" class="block wrap">
+    <h2>기술</h2>
+    <dl class="skills">
+      {
+        about.skills.map((s) => (
+          <>
+            <dt>{s.group}</dt>
+            <dd class="tags">
+              {s.items.map((i) => (
+                <span class="tag">{i}</span>
+              ))}
+            </dd>
+          </>
+        ))
+      }
+    </dl>
+  </section>
+
+  <section id="projects" class="block wrap">
+    <h2>프로젝트</h2>
+    <ul class="grid">
+      {
+        about.projects.map((p) => {
+          const inner = (
+            <>
+              <h3>{p.title}</h3>
+              <p>{p.body}</p>
+              <div class="tags">
+                {p.tags.map((t) => (
+                  <span class="tag">{t}</span>
+                ))}
+              </div>
+            </>
+          );
+          return <li>{p.href ? <a class="card project" href={url(p.href)}>{inner}</a> : <div class="card project">{inner}</div>}</li>;
+        })
+      }
+    </ul>
+  </section>
+
+  <section id="timeline" class="block wrap">
+    <h2>이력</h2>
+    <ol class="timeline">
+      {
+        about.timeline.map((t) => (
+          <li>
+            <span class="when">{t.when}</span>
+            <span>{t.what}</span>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section id="contact" class="block wrap">
+    <h2>연락처</h2>
+    <ul class="contact">
+      {
+        about.contact.map((c) => (
+          <li>
+            <span class="meta">{c.label}</span>
+            {c.href ? <a href={c.href}>{c.value}</a> : <span>{c.value}</span>}
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</AboutLayout>
+
+<style>
+  .hero {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 24px 32px;
+    padding-top: clamp(48px, 10vw, 96px);
+    padding-bottom: 32px;
+  }
+
+  .avatar {
+    flex: none;
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 2.8rem;
+    font-weight: 800;
+  }
+
+  .hero > div:last-child {
+    flex: 1 1 320px;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 6vw, 2.8rem);
+    margin: 0 0 8px;
+  }
+
+  .summary {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.1rem;
+    max-width: 36em;
+  }
+
+  .block {
+    padding-top: 48px;
+    padding-bottom: 8px;
+    scroll-margin-top: 60px;
+  }
+
+  .block h2 {
+    font-size: 1.4rem;
+    margin: 0 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent);
+    display: inline-block;
+  }
+
+  .skills {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 12px 24px;
+    margin: 0;
+  }
+
+  .skills dt {
+    color: var(--muted);
+  }
+
+  .skills dd {
+    margin: 0;
+  }
+
+  .project {
+    height: 100%;
+  }
+
+  .project h3 {
+    margin: 0 0 4px;
+    font-size: 1.15rem;
+  }
+
+  .project p {
+    margin: 0 0 12px;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 20px;
+    border-left: 2px solid var(--line);
+  }
+
+  .timeline li {
+    position: relative;
+    padding: 6px 0;
+  }
+
+  .timeline li::before {
+    content: '';
+    position: absolute;
+    left: -27px;
+    top: 15px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .when {
+    display: inline-block;
+    min-width: 7em;
+    font-weight: 700;
+  }
+
+  .contact {
+    list-style: none;
+    margin: 0 0 64px;
+    padding: 0;
+  }
+
+  .contact .meta {
+    display: inline-block;
+    min-width: 5em;
+  }
+</style>

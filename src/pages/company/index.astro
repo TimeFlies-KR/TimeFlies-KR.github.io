@@ -1,0 +1,152 @@
+---
+import CompanyLayout from '../../layouts/CompanyLayout.astro';
+import { company } from '../../data/company';
+import { getEntries } from '../../lib/entries';
+import { url } from '../../lib/util';
+
+const games = await getEntries('games');
+---
+
+<CompanyLayout current="home">
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">GAME STUDIO</p>
+      <h1>{company.tagline}</h1>
+      <div class="actions">
+        <a class="button" href={url('company/games/')}>게임 보기</a>
+        <a class="button ghost" href="#contact">연락하기</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="block">
+    <div class="wrap">
+      <h2>우리는</h2>
+      <p class="intro">{company.intro}</p>
+      <ul class="grid values">
+        {
+          company.values.map((v, i) => (
+            <li class="card">
+              <span class="num">0{i + 1}</span>
+              <h3>{v.title}</h3>
+              <p>{v.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="block alt">
+    <div class="wrap">
+      <h2>만들고 있는 게임</h2>
+      <ul class="grid">
+        {
+          games.map((g) => (
+            <li>
+              <a class="card game" href={url(`company/games/${g.id}/`)}>
+                <span class="tag">{g.data.status}</span>
+                <h3>{g.data.title}</h3>
+                <p>{g.data.description}</p>
+                <span class="meta">{g.data.genre}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section id="contact" class="block">
+    <div class="wrap">
+      <h2>연락처</h2>
+      <dl class="contact">
+        {
+          company.contact.map((c) => (
+            <>
+              <dt>{c.label}</dt>
+              <dd>{c.href ? <a href={c.href}>{c.value}</a> : c.value}</dd>
+            </>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+</CompanyLayout>
+
+<style>
+  .hero {
+    padding: clamp(56px, 12vw, 120px) 0;
+    background: linear-gradient(180deg, var(--accent-soft), var(--bg));
+  }
+
+  .hero h1 {
+    font-size: clamp(1.9rem, 5.5vw, 3rem);
+    max-width: 18em;
+    margin: 0 0 28px;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .block {
+    padding: 64px 0;
+    scroll-margin-top: 60px;
+  }
+
+  .block.alt {
+    background: var(--surface);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .block h2 {
+    font-size: 1.6rem;
+    margin: 0 0 20px;
+  }
+
+  .intro {
+    max-width: 40em;
+    font-size: 1.1rem;
+    margin: 0 0 32px;
+  }
+
+  .values h3,
+  .game h3 {
+    margin: 4px 0;
+    font-size: 1.15rem;
+  }
+
+  .values p,
+  .game p {
+    margin: 0 0 8px;
+    color: var(--muted);
+  }
+
+  .num {
+    color: var(--accent);
+    font-weight: 800;
+  }
+
+  .block.alt .card {
+    background: var(--bg);
+  }
+
+  .contact {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 6px 24px;
+    margin: 0;
+  }
+
+  .contact dt {
+    color: var(--muted);
+  }
+
+  .contact dd {
+    margin: 0;
+  }
+</style>

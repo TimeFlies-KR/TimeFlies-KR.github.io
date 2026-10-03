@@ -1,0 +1,29 @@
+---
+import BlogLayout from '../../../layouts/BlogLayout.astro';
+import PostList from '../../../components/PostList.astro';
+import { getEntries } from '../../../lib/entries';
+import { url } from '../../../lib/util';
+
+export async function getStaticPaths() {
+  const posts = await getEntries('blog');
+  const tags = [...new Set(posts.flatMap((p) => p.data.tags))];
+  return tags.map((tag) => ({
+    params: { tag },
+    props: { tag, posts: posts.filter((p) => p.data.tags.includes(tag)) },
+  }));
+}
+
+const { tag, posts } = Astro.props;
+---
+
+<BlogLayout title={`#${tag}`} current="tags">
+  <a href={url('blog/tags/')}>← 모든 태그</a>
+  <h1>#{tag}</h1>
+  <PostList posts={posts} />
+</BlogLayout>
+
+<style>
+  h1 {
+    margin: 12px 0 0;
+  }
+</style>
